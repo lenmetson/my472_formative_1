@@ -351,14 +351,111 @@ display: none;
 
 <h1 class="title toc-ignore">Formative 1</h1>
 <h4 class="author">Len Metson</h4>
+<h4 class="date">12th October 2023</h4>
 
 </div>
 
 
+<div id="exercise-1" class="section level1">
+<h1>Exercise 1</h1>
+<p>My forked repository can be found at the URL: <a href="https://github.com/lenmetson/my472_formative_1">https://github.com/lenmetson/my472_formative_1</a>.</p>
+</div>
+<div id="exercise-2" class="section level1">
+<h1>Exercise 2</h1>
+<pre><code>## # A tibble: 35 × 3
+##    Tree    age circumference
+##    &lt;ord&gt; &lt;dbl&gt;         &lt;dbl&gt;
+##  1 1       118            30
+##  2 1       484            58
+##  3 1       664            87
+##  4 1      1004           115
+##  5 1      1231           120
+##  6 1      1372           142
+##  7 1      1582           145
+##  8 2       118            33
+##  9 2       484            69
+## 10 2       664           111
+## # ℹ 25 more rows</code></pre>
+<p>The dataset <code>Orange</code> is tidy with tree-age our unit of
+analysis. Each observation (<code>Tree</code> at <code>age</code>) is
+represented in it’s own row, and each variable (<code>Tree</code>,
+<code>age</code>, <code>circumference</code>) has it’s own column. We
+kan see this when we print the tibble using the <code>head()</code>
+function:</p>
+<pre><code>##   Tree  age circumference
+## 1    1  118            30
+## 2    1  484            58
+## 3    1  664            87
+## 4    1 1004           115
+## 5    1 1231           120
+## 6    1 1372           142</code></pre>
+<p>I now create a wide version of this dataset to make it untidy.
+Specifically, we will represent <code>Tree</code> in the rows of the
+table and <code>age</code> in the columns. Values are taken from the
+<code>circumfence</code> column. In order to do this, I use the
+<code>tidyr::pivot_wider()</code> function, specifying the
+<code>names_from</code> parameter as <code>age</code> so that this
+appears in the column names, and the <code>values_from</code> parameter
+as <code>circumference</code>.</p>
+<p>We can see by running the <code>head()</code> function again that the
+data is now untidy, with each column representing an age, and each row
+representing a tree.</p>
+<pre><code>## # A tibble: 5 × 8
+##   Tree  `118` `484` `664` `1004` `1231` `1372` `1582`
+##   &lt;ord&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 1        30    58    87    115    120    142    145
+## 2 2        33    69   111    156    172    203    203
+## 3 3        30    51    75    108    115    139    140
+## 4 4        32    62   112    167    179    209    214
+## 5 5        30    49    81    125    142    174    177</code></pre>
+</div>
+<div id="exercise-3" class="section level1">
+<h1>Exercise 3</h1>
+</div>
 <div id="code-appendix" class="section level1">
 <h1>Code Appendix</h1>
 <pre class="r"><code>knitr::opts_chunk$set(echo = FALSE)
-# we set echo=FALSE to suppress code such that it by default does not appear throughout the document. </code></pre>
+# we set echo=FALSE to suppress code such that it by default does not appear throughout the document. 
+library(magrittr)
+data(&quot;Orange&quot;) 
+
+tibble::as_tibble(Orange)</code></pre>
+<pre><code>## # A tibble: 35 × 3
+##    Tree    age circumference
+##    &lt;ord&gt; &lt;dbl&gt;         &lt;dbl&gt;
+##  1 1       118            30
+##  2 1       484            58
+##  3 1       664            87
+##  4 1      1004           115
+##  5 1      1231           120
+##  6 1      1372           142
+##  7 1      1582           145
+##  8 2       118            33
+##  9 2       484            69
+## 10 2       664           111
+## # ℹ 25 more rows</code></pre>
+<pre class="r"><code>head(Orange)</code></pre>
+<pre><code>##   Tree  age circumference
+## 1    1  118            30
+## 2    1  484            58
+## 3    1  664            87
+## 4    1 1004           115
+## 5    1 1231           120
+## 6    1 1372           142</code></pre>
+<pre class="r"><code>Orange &lt;- Orange %&gt;%
+  tidyr::pivot_wider(
+    names_from = age,
+    values_from = circumference
+  )
+head(Orange)</code></pre>
+<pre><code>## # A tibble: 5 × 8
+##   Tree  `118` `484` `664` `1004` `1231` `1372` `1582`
+##   &lt;ord&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 1        30    58    87    115    120    142    145
+## 2 2        33    69   111    156    172    203    203
+## 3 3        30    51    75    108    115    139    140
+## 4 4        32    62   112    167    179    209    214
+## 5 5        30    49    81    125    142    174    177</code></pre>
 </div>
 
 

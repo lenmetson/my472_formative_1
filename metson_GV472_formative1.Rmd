@@ -10,12 +10,44 @@ knitr::opts_chunk$set(echo = FALSE)
 # we set echo=FALSE to suppress code such that it by default does not appear throughout the document. 
 ```
 
+```{r}
+library(magrittr)
+```
+
 
 # Exercise 1
 
 My forked repository can be found at the URL: [https://github.com/lenmetson/my472_formative_1](https://github.com/lenmetson/my472_formative_1). 
 
 # Exercise 2
+
+```{r}
+data("Orange") 
+
+tibble::as_tibble(Orange)
+```
+
+The dataset `Orange` is tidy with tree-age our unit of analysis. Each observation (`Tree` at `age`) is represented in it's own row, and each variable (`Tree`, `age`, `circumference`) has it's own column. We kan see this when we print the tibble using the `head()` function: 
+
+```{r}
+head(Orange)
+```
+
+I now create a wide version of this dataset to make it untidy. Specifically, we will represent `Tree` in the rows of the table and `age` in the columns. Values are taken from the `circumfence` column. In order to do this, I use the `tidyr::pivot_wider()` function, specifying the `names_from` parameter as `age` so that this appears in the column names, and the `values_from` parameter as `circumference`. 
+
+```{r}
+Orange <- Orange %>%
+  tidyr::pivot_wider(
+    names_from = age,
+    values_from = circumference
+  )
+```
+
+We can see by running the `head()` function again that the data is now untidy, with each column representing an age, and each row representing a tree. 
+
+```{r}
+head(Orange)
+```
 
 # Exercise 3
 
