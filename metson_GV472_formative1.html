@@ -411,6 +411,21 @@ representing a tree.</p>
 </div>
 <div id="exercise-3" class="section level1">
 <h1>Exercise 3</h1>
+<pre class="r"><code>warpbreaks_breaks_by_tension &lt;- warpbreaks %&gt;% # Name new object 
+  dplyr::group_by(tension) %&gt;% # Group the data by tension
+  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) # For each new group, take the mean number of breaks
+
+# Add transformation of a numeric variable after summarise()</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##   tension average_breaks
+##   &lt;fct&gt;            &lt;dbl&gt;
+## 1 L                 36.4
+## 2 M                 26.4
+## 3 H                 21.7</code></pre>
+<p>By transforming the data in this way, we can more easily compare the
+differences between different tensions. We can see that there are more
+breaks on average when tension is low, than when tension is high for
+example.</p>
 </div>
 <div id="code-appendix" class="section level1">
 <h1>Code Appendix</h1>
@@ -456,6 +471,20 @@ head(Orange)</code></pre>
 ## 3 3        30    51    75    108    115    139    140
 ## 4 4        32    62   112    167    179    209    214
 ## 5 5        30    49    81    125    142    174    177</code></pre>
+<pre class="r"><code>data(&quot;warpbreaks&quot;)
+warpbreaks_breaks_by_tension &lt;- warpbreaks %&gt;% # Name new object 
+  dplyr::group_by(tension) %&gt;% # Group the data by tension
+  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) # For each new group, take the mean number of breaks
+
+# Add transformation of a numeric variable after summarise()
+  
+head(warpbreaks_breaks_by_tension)</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##   tension average_breaks
+##   &lt;fct&gt;            &lt;dbl&gt;
+## 1 L                 36.4
+## 2 M                 26.4
+## 3 H                 21.7</code></pre>
 </div>
 
 

@@ -51,6 +51,25 @@ head(Orange)
 
 # Exercise 3
 
+```{r}
+data("warpbreaks")
+```
+
+```{r, echo = TRUE}
+warpbreaks_breaks_by_tension <- warpbreaks %>% # Name new object 
+  dplyr::group_by(tension) %>% # Group the data by tension
+  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) # For each new group, take the mean number of breaks
+
+# Add transformation of a numeric variable after summarise()
+  
+```
+
+```{r}
+head(warpbreaks_breaks_by_tension)
+```
+
+By transforming the data in this way, we can more easily compare the differences between different tensions. We can see that there are more breaks on average when tension is low, than when tension is high for example. 
+
 # Code Appendix
 
 ```{r ref.label=knitr::all_labels(), echo=TRUE} 
