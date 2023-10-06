@@ -413,7 +413,8 @@ representing a tree.</p>
 <h1>Exercise 3</h1>
 <pre class="r"><code>warpbreaks_breaks_by_tension &lt;- warpbreaks %&gt;% # Name new object 
   dplyr::group_by(tension) %&gt;% # Group the data by tension
-  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) # For each new group, take the mean number of breaks
+  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) %&gt;% # For each new group, take the mean number of breaks
+  dplyr::mutate(average_breaks = as.numeric(average_breaks)) # Convert to numeric
 
 # Add transformation of a numeric variable after summarise()</code></pre>
 <pre><code>## # A tibble: 3 × 2
@@ -474,7 +475,8 @@ head(Orange)</code></pre>
 <pre class="r"><code>data(&quot;warpbreaks&quot;)
 warpbreaks_breaks_by_tension &lt;- warpbreaks %&gt;% # Name new object 
   dplyr::group_by(tension) %&gt;% # Group the data by tension
-  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) # For each new group, take the mean number of breaks
+  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) %&gt;% # For each new group, take the mean number of breaks
+  dplyr::mutate(average_breaks = as.numeric(average_breaks)) # Convert to numeric
 
 # Add transformation of a numeric variable after summarise()
   

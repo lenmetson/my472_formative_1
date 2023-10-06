@@ -58,7 +58,8 @@ data("warpbreaks")
 ```{r, echo = TRUE}
 warpbreaks_breaks_by_tension <- warpbreaks %>% # Name new object 
   dplyr::group_by(tension) %>% # Group the data by tension
-  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) # For each new group, take the mean number of breaks
+  dplyr::summarise(average_breaks = mean(breaks, na.rm = TRUE)) %>% # For each new group, take the mean number of breaks
+  dplyr::mutate(average_breaks = as.numeric(average_breaks)) # Convert to numeric
 
 # Add transformation of a numeric variable after summarise()
   
